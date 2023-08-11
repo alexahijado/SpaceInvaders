@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#board {
+    background-color: cyan;
+    height: 100vh;
+    position: relative;
+}
