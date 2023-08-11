@@ -11,9 +11,9 @@ Project 1 of Ironhack Bootcamp
 - Milestone 4.1: if collision is detected between player and enemy, game over
 - Milestone 4.2: if enemies reach the bottom, game over
 
-##Milestone 5: randomize the appearance of the enemies
+## Milestone 5: randomize the appearance of the enemies
 
-##Milestone 6: give the player and the enemies an image, as well as the background
+## Milestone 6: give the player and the enemies an image, as well as the background
 
 ## Milestone 7: provide points for each enemy killed
 
