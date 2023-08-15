@@ -1,4 +1,7 @@
-const bulletsArr = []
+const bulletsArr = [];
+let points = 0;
+let lives = 3;
+let ammo = 10;
 class Player {
     constructor(){
         this.width = 5;
@@ -44,8 +47,14 @@ class Player {
         this.domElement.style.bottom = this.y + "vh";
     }
 
-    shooting(){
-        bulletsArr.push(new Bullet(this.x, this.y))
+    shooting() {
+        if (ammo > 0) {
+            bulletsArr.push(new Bullet(this.x, this.y));
+            let mySound = new Audio('./audio/laser.mp3');
+            mySound.play();
+            ammo = ammo - 5;
+            ammoDisplay.textContent = `Ammo: ${ammo}`;
+        }
     }
     
     addEventListeners() {
@@ -104,7 +113,7 @@ function createEnemies (){
     setInterval(() => {
         const newEnemy = new Enemy();
         enemiesArr.push(newEnemy);
-    }, 2000);
+    }, 1000);
 
     setInterval(() => {
         enemiesArr.forEach((element, index) => {
@@ -112,12 +121,17 @@ function createEnemies (){
             if (element.y < 0 - element.height) {
                 enemiesArr.splice(index, 1);
                 element.domElement.remove();
+                lives--; 
+                livesDisplay.textContent = `Lives: ${lives}`;
+                if (lives === 0) {
+                    location.href = "./gameover.html";
+                }
             }
         });
     }, 100);
     bulletCollision = setInterval(() => {
-        enemiesArr.forEach((enemy) => {
-            bulletsArr.forEach((bullet) => {
+        enemiesArr.forEach((enemy, enemyIndex) => {
+            bulletsArr.forEach((bullet, bulletIndex) => {
                 if (
                     bullet.x < enemy.x + enemy.width &&
                     bullet.x + bullet.width > enemy.x &&
@@ -125,10 +139,57 @@ function createEnemies (){
                     bullet.y + bullet.height > enemy.y
                 ) {
                     enemy.domElement.remove();
-                }
-            });
+                    enemiesArr.splice(enemyIndex, 1);
+                    bullet.domElement.remove();
+                    bulletsArr.splice(bulletIndex, 1);
+                    points = points + 10
+                    if (pointsDisplay){
+                        pointsDisplay.textContent = `Points: ${points}`;
+                    }
+                    if (livesDisplay) {
+                        livesDisplay.textContent = `Lives: ${lives}`;
+                    }
+                    if (ammoDisplay) {
+                        ammoDisplay.textContent = `Ammo: ${ammo}`;
+                    }
+                    ammo = ammo + 20;
+                    ammoDisplay.textContent = `Ammo: ${ammo}`;
+            }});
         });
     }, 100);
+
+    function createPointsDisplay() {
+        const pointsDisplay = document.createElement("div");
+        pointsDisplay.id = "points-display";
+        pointsDisplay.textContent = `Points: ${points}`;
+        
+        const parentElement = document.getElementById("board");
+        parentElement.appendChild(pointsDisplay);
+        return pointsDisplay;
+    }
+    const pointsDisplay = createPointsDisplay();
+
+    function createLivesDisplay() {
+        const livesDisplay = document.createElement("div");
+        livesDisplay.id = "lives-display";
+        livesDisplay.textContent = `Lives: ${lives}`;
+        
+        const parentElement = document.getElementById("board");
+        parentElement.appendChild(livesDisplay);
+        return livesDisplay;
+    }
+    const livesDisplay = createLivesDisplay();
+
+    function createAmmoDisplay() {
+        const ammoDisplay = document.createElement("div");
+        ammoDisplay.id = "ammo-display";
+        ammoDisplay.textContent = `Ammo: ${ammo}`;
+        
+        const parentElement = document.getElementById("board");
+        parentElement.appendChild(ammoDisplay);
+        return ammoDisplay;
+    }
+    const ammoDisplay = createAmmoDisplay();
 }
 
 createEnemies();
@@ -142,13 +203,18 @@ function collision() {
                 player.y < enemy.y + enemy.height &&
                 player.y + player.height > enemy.y
             ) {
-                location.href = "./gameover.html";
+                lives--; 
+                livesDisplay.textContent = `Lives: ${lives}`;
+                if (lives === 0) {
+                    location.href = "./gameover.html";
+                }
             }
         }, 1);
         })  
 };
 
 collision();
+
 
 
 bulletInterval = setInterval(() => {
@@ -185,7 +251,4 @@ class Bullet {
         const parentElement = document.getElementById("board");
         parentElement.appendChild(this.domElement);
     }
-
-
-
 }

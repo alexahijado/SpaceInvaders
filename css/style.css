@@ -6,7 +6,8 @@ body {
 #board {
     background: url("../images/jupiter.jpeg");
     height: 100vh;
-    position: relative;
+    width: 100vw;
+    position: fixed;
     background-size: cover;
 }
 
@@ -36,3 +37,65 @@ body {
     font-size: 48px;
     background-color: lightgrey;
 }
+
+#page-gameover a {
+    text-decoration: none;
+    color: red;
+}
+
+#points-display {
+    display: block;
+    color: white;
+    position: relative;
+    text-align: left;
+}
+
+#lives-display {
+    display: block;
+    color: white;
+    position: relative;
+    text-align: left;
+}
+
+#ammo-display {
+    display: block;
+    color: white;
+    position: relative;
+    text-align: left;
+}
+
+.welcome {
+    display: block;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.welcome h1 {
+    margin: 25px;
+    padding: 25px;
+}
+
+.welcome ul li {
+    text-decoration: none;
+    list-style: none;
+    margin: 25px;
+}
+
+.welcome p {
+    font-size: 24px;
+    padding: 25px;
+    margin: 25px;
+}
+
+.welcome p span {
+    font-style: italic;
+}
+
+.welcome div a {
+    font-size: 40px;
+    text-decoration: none;
+    color: red;
+    margin: 25px;
+    padding: 25px;
+}
+
