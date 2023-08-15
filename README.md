@@ -20,3 +20,9 @@ Project 1 of Ironhack Bootcamp
 ## Milestone 8: start with ammo at half, ammo decreases with every shot and for each enemy killed increase ammo ✅
 
 ## Milestone 9: add player lives ✅
+
+## Milestone 10: after 50 enemies killed a final boss
+
+## Milestone 11: add final points to the game over screen
+
+## Milestone 12: after the final boss, new level with faster enemies and different color laser
