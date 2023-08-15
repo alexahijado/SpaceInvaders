@@ -4,7 +4,35 @@ body {
 }
 
 #board {
-    background-color: cyan;
+    background: url("../images/jupiter.jpeg");
     height: 100vh;
     position: relative;
+    background-size: cover;
+}
+
+#player {
+    background: url('../images/spaceship.webp');
+    background-size: contain;
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#enemy {
+    background: url("../images/alien.png");
+    background-size: contain;
+    position: absolute;
+    background-size: cover;
+}
+
+#bullet {
+    background-color: white;
+    position: absolute;
+}
+
+#page-gameover {
+    display: block;
+    text-align: center;
+    font-size: 48px;
+    background-color: lightgrey;
 }
