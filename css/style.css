@@ -5,10 +5,11 @@ body {
 
 #board {
     background: url("../images/jupiter.jpeg");
-    height: 100vh;
-    width: 100vw;
+    height: 900px;
+    width: 1920px;
     position: fixed;
     background-size: cover;
+
 }
 
 #player {
