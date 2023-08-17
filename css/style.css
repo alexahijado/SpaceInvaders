@@ -108,8 +108,19 @@ body {
 
 #boss {
     background: url('../images/boss.png');
-    background-size: cover;
     position: absolute;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+}
+
+#congratulations {
+    display: block;
+    text-align: center;
+    font-size: 48px;
+    background-color: lightgrey;
+}
+
+#congratulations a {
+    text-decoration: none;
+    color: red
 }
