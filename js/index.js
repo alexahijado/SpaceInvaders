@@ -343,7 +343,7 @@ const enemyShooting = setInterval(() => {
         bullet.x = this.x + (this.width / 2);
         bullet.domElement.style.bottom = bullet.y + "px"
         bullet.domElement.style.bottom = bullet.x + "px"
-        if (bullet.y < 0) {
+        if (bullet.y < 0 + this.bullet.y) {
             enemyBullets.splice(i, 1)
         }
     });
