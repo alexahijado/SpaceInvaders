@@ -2,6 +2,8 @@ const bulletsArr = [];
 let points = 0;
 let lives = 3;
 let ammo = 30;
+let enemiesKilled = 0;
+let bossSpawned = false;
 class Player {
     constructor(){
         this.width = 90;
@@ -89,7 +91,7 @@ const player = new Player ();
 class Enemy {
     constructor() {
         this.width = 50;
-        this.height = 30;
+        this.height = 50;
         this.x = Math.floor(Math.random() * (900 - this.width + 1));
         this.y = 900;
         this.domElement = null;
@@ -116,25 +118,37 @@ class Enemy {
 
 let enemiesArr = []
 function createEnemies (){
-    setInterval(() => {
-        const newEnemy = new Enemy();
-        enemiesArr.push(newEnemy);
-    }, 3000);
-
-    setInterval(() => {
-        enemiesArr.forEach((element, index) => {
-            element.moveDown();
-            if (element.y < 0 - element.height) {
-                enemiesArr.splice(index, 1);
-                element.domElement.remove();
-                lives--; 
-                livesDisplay.textContent = `Lives: ${lives}`;
-                if (lives === 0) {
-                    location.href = `./gameover.html?score=${points}`;
-                }
+    
+    enemyCreationInterval = setInterval(() => {
+            if (!bossSpawned){
+            const newEnemy = new Enemy();
+            enemiesArr.push(newEnemy);
             }
-        });
-    }, 200);
+        }, 3000);
+
+        setInterval(() => {
+            enemiesArr.forEach((element, index) => {
+                element.moveDown();
+                if (element.y < 0 - element.height) {
+                    enemiesArr.splice(index, 1);
+                    element.domElement.remove();
+                    
+                    lives--; 
+                    livesDisplay.textContent = `Lives: ${lives}`;
+                    if (lives === 0) {
+                        location.href = `./gameover.html?score=${points}`;
+                    }
+                }
+                
+            });
+            if (enemiesKilled === 1 && !bossSpawned) {
+                const newBoss = new Boss();
+                newBoss.addEventListeners();
+                bossSpawned = true;
+                enemiesKilled = 0;
+                clearInterval(enemyCreationInterval);
+            }
+        }, 200);
 }
 
 createEnemies();
@@ -185,7 +199,6 @@ setInterval(() => {
                 lives--; 
                 livesDisplay.textContent = `Lives: ${lives}`;
                 if (lives === 0) {
-                    
                     location.href = `./gameover.html?score=${points}`;
                 }
                 enemy.domElement.remove();
@@ -222,6 +235,7 @@ bulletInterval = setInterval(() => {
                     bullet.domElement.remove();
                     bulletsArr.splice(bulletIndex, 1);
                     points = points + 10
+                 
                         if (pointsDisplay){
                             pointsDisplay.textContent = `Points: ${points}`;
                         }
@@ -262,5 +276,43 @@ class Bullet {
         console.log(this.domElement)
         const parentElement = document.getElementById("board");
         parentElement.appendChild(this.domElement);
+    }
+}
+
+class Boss {
+    constructor() {
+        this.width = 250;
+        this.height = 250;
+        this.x = 900 - (this.width / 2);
+        this.y = 900;
+        this.domElement = null;
+        this.createDomElement();
+        this.addEventListeners();
+    }
+
+    createDomElement() {
+        this.domElement = document.createElement("div");
+        this.domElement.id = "boss";
+        this.domElement.style.width = this.width + "px";
+        this.domElement.style.height = this.height + "px";
+        this.domElement.style.left = this.x + "px";
+        this.domElement.style.bottom = this.y + "px";
+
+        const parentElement = document.getElementById("board");
+        parentElement.appendChild(this.domElement);
+    }
+
+    shoot() {
+        bulletsArr.push(new Bullet(this.x, this.y));
+    }
+
+    addEventListeners() {
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                this.shoot();
+            } else if (event.key === "ArrowRight") {
+                this.shoot();
+            }
+        });
     }
 }

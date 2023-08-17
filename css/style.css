@@ -21,7 +21,7 @@ body {
 }
 
 #enemy {
-    background: url("../images/alien.png");
+    background: url("../images/seagull.gif");
     background-size: contain;
     position: absolute;
     background-size: cover;
@@ -106,3 +106,10 @@ body {
     padding: 25px;
 }
 
+#boss {
+    background: url('../images/boss.png');
+    background-size: cover;
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
