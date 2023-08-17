@@ -119,7 +119,7 @@ function createEnemies (){
     setInterval(() => {
         const newEnemy = new Enemy();
         enemiesArr.push(newEnemy);
-    }, 1000);
+    }, 2000);
 
     setInterval(() => {
         enemiesArr.forEach((element, index) => {
