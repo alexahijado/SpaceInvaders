@@ -1,10 +1,10 @@
 const bulletsArr = [];
 let points = 0;
 let lives = 3;
-let ammo = 10;
+let ammo = 30;
 class Player {
     constructor(){
-        this.width = 50;
+        this.width = 90;
         this.height = 70;
         this.x = 900 - (this.width / 2);
         this.y = 0;

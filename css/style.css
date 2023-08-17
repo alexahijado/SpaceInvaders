@@ -4,7 +4,7 @@ body {
 }
 
 #board {
-    background: url("../images/jupiter.jpeg");
+    background: url("../images/horizon.jpg");
     height: 900px;
     width: 1920px;
     position: fixed;
@@ -13,8 +13,8 @@ body {
 }
 
 #player {
-    background: url('../images/spaceship.webp');
-    background-size: contain;
+    background: url('../images/shark.png');
+    background-size: auto;
     position: absolute;
     background-size: cover;
     background-repeat: no-repeat;
@@ -49,6 +49,8 @@ body {
     color: white;
     position: relative;
     text-align: left;
+    padding-top: 28px;
+    padding-left: 28px;
 }
 
 #lives-display {
@@ -56,6 +58,8 @@ body {
     color: white;
     position: relative;
     text-align: left;
+    padding-top: 28px;
+    padding-left: 28px;
 }
 
 #ammo-display {
@@ -63,6 +67,8 @@ body {
     color: white;
     position: relative;
     text-align: left;
+    padding-top: 28px;
+    padding-left: 28px;
 }
 
 .welcome {
