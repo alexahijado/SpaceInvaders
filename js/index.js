@@ -124,7 +124,6 @@ let enemiesArr = []
 function createEnemies (){
     
     const enemyCreationInterval = setInterval(() => {
-        console.log("hello", bossSpawned)
             if (!bossSpawned){
             const newEnemy = new Enemy();
             enemiesArr.push(newEnemy);
@@ -147,7 +146,7 @@ function createEnemies (){
                 
             });
             
-            if (enemiesKilled === 25 && !bossSpawned) {
+            if (enemiesKilled === 15 && !bossSpawned) {
                 boss.createDomElement()
                 bossSpawned = true;
                 clearInterval(enemyCreationInterval());
@@ -340,9 +339,9 @@ class Boss {
 const enemyShooting = setInterval(() => {
     enemyBullets.forEach((bullet, i) => {
         bullet.y -= 10
-        bullet.x = this.x + (this.width / 2);
-        bullet.domElement.style.bottom = bullet.y + "px"
-        bullet.domElement.style.bottom = bullet.x + "px"
+        bullet.domElement.style.bottom = bullet.y + "px";
+        bullet.x = this.x + (this.width / 2) - (bullet.width / 2);
+        bullet.domElement.style.left = bullet.x + "px";
         if (bullet.y < 0 + this.bullet.y) {
             enemyBullets.splice(i, 1)
         }
@@ -350,12 +349,12 @@ const enemyShooting = setInterval(() => {
     
 
     function detectBulletCollision() {
-        enemyBullets.forEach((bullet) => {
+        enemyBullets.forEach((bullet, index) => {
             if (
-                player.x < bullet.x + bullet.width &&
-                player.x + player.width > bullet.x &&
-                player.y < bullet.y + bullet.height &&
-                player.y + player.height > bullet.y
+                player.x < this.bullet.x + this.bullet.width &&
+                player.x + player.width > this.bullet.x &&
+                player.y < this.bullet.y + this.bullet.height &&
+                player.y + player.height > this.bullet.y
             ) {
                 lives--; 
                 livesDisplay.textContent = `Lives: ${lives}`;
@@ -363,7 +362,7 @@ const enemyShooting = setInterval(() => {
                     location.href = `./gameover.html?score=${points}`;
                 }
                 bullet.domElement.remove();
-                enemyBullets.splice(enemyBullets.indexOf(bullet), 1);
+                enemyBullets.splice(index, 1);
             }
         })
     }
